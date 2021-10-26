@@ -1,0 +1,29 @@
+[package]
+name = "stress_test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cortex-m = "0.7.3"
+cortex-m-rt = "0.7"
+
+panic-probe = "*"
+#panic-halt = "*"
+#panic-persist = "*"
+
+embedded-hal = { version = "0.2.5", features = ["unproven"] }
+embedded-time = "0.12.0"
+
+rp2040-hal = { git = "https://github.com/rp-rs/rp-hal", features = ["rt"] }
+rp2040-boot2 = { git = "https://github.com/rp-rs/rp2040-boot2-rs", branch = "main" }
+futures = { version = "*", default-features = false }
+embassy = { git = "https://github.com/embassy-rs/embassy", rev = "a8797f84f69b7668a3f89b6cba3e39bce5649079" }
+
+[profile.release]
+debug = true
+lto = true
+codegen-units = 1
+panic = "abort"
+opt-level = "s"
